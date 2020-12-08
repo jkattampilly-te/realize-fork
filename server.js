@@ -19,8 +19,16 @@ app.get("/testing", (request, response) => {
   response.sendFile(__dirname + "/views/hudTest.html");
 });
 
+app.get("/graph-demo", (request, response) => {
+  response.sendFile(__dirname + "/views/graph-demo-aframe.html");
+});
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
+
+// // listen for requests :)
+// const listener = app.listen(60643, () => {
+//   console.log("Your app is listening on port " + listener.address().port);
+// });
