@@ -49,39 +49,15 @@ AFRAME.registerComponent('hud', {
         });
         
         hud.addEventListener('grab-start', function(event) {
-            let positionStart = '0.2 0 -1.5';
-            let positionEnd = '0.4 0 -1.5';
-            let scaleStart = '1.2 0.8 0.05';
-            let scaleEnd = '0.08 0.08 0.05';
-            if (!isMinimized) {
-                    hud.setAttribute('animation', {
-                    property: 'scale',
-                    from: scaleStart,
-                    to: scaleEnd,
-                    dur: '400'
-                });
-                
-                hud.setAttribute('animation__2', {
-                    property: 'position',
-                    from: positionStart,
-                    to: positionEnd,
-                    dur: '400'
-                });
-                isMinimized = true;
-            }
-            else {
-                hud.setAttribute('animation', {
-                    property: 'scale',
-                    from: scaleEnd,
-                    to: scaleStart
-                });
-                hud.setAttribute('animation__2', {
-                    property: 'position',
-                    from: positionEnd,
-                    to: positionStart,
-                    dur: '400'
-                });
-                isMinimized = false;
+            const globe = document.querySelector('#globe-scene');
+            const cylinder = document.querySelector('#cylinder-scene');
+            const showGlobe = !globe.getAttribute('visible');
+            if (showGlobe) {
+                globe.setAttribute('visible', true);
+                cylinder.setAttribute('visible', false);
+            } else {
+                globe.setAttribute('visible', false);
+                cylinder.setAttribute('visible', true);
             }
         });
     }
