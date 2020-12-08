@@ -11,7 +11,7 @@ https://frost-silly-cosmos.glitch.me/
 On the front-end,
 
 - Edit `views/index.html` to change the content of the webpage
-- `public/script.js` is the javacript that runs when you load the webpage
+- `public/script.js` is the javascript that runs when you load the webpage
 - `public/style.css` is the styles for `views/index.html`
 
 On the back-end,
@@ -19,4 +19,12 @@ On the back-end,
 - your app starts at `server.js`
 - add frameworks and packages in `package.json`
 
+## Local dev
 
+start with a port
+`PORT 3000 node server.js`
+
+Create a ngrok account, and follow the steps: https://dashboard.ngrok.com/get-started/setup
+
+Eventually, connect ngrok to your local server.
+`./ngrok http 3000`
