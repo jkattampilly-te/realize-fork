@@ -1,0 +1,36 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Minimizable HUD</title>
+    <meta name="basic scene to test dashboarded network graph" content="A-frame scene">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <script src="aframeHud.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity custom-super-hand="hand: left"></a-entity>
+      <a-entity custom-super-hand='hand: right'></a-entity>
+        		<!-- CAMERA RIG -->
+        <a-entity id="cameraRig" position="0 0 0.5">
+            <!-- CAMERA -->
+            <a-camera id="camera">
+                <a-entity hud></a-entity>
+                <a-cursor super-hands="colliderEvent: raycaster-intersection;
+             colliderEventProperty: els;
+             colliderEndEvent: raycaster-intersection-cleared;
+             colliderEndEventProperty: clearedEls" raycaster="objects: .collidable"></a-cursor>
+            </a-camera>
+        </a-entity>
+    </a-scene>
+      
+  </body>
+</html>
