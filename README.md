@@ -28,3 +28,5 @@ Create a ngrok account, and follow the steps: https://dashboard.ngrok.com/get-st
 
 Eventually, connect ngrok to your local server.
 `./ngrok http 3000`
+
+Access the ngrok url from your oculus browser
