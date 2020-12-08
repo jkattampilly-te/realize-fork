@@ -1,123 +1,37 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A cool thing made with Glitch">
+    <head>
+        <title>three.js webgl - buffergeometry - lines drawrange</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="css/main.css">
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+        <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+        <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+        <script src="aframeHud.js"></script>
+        <script src="dist/graphIntegrator.js"></script>
+    </head>
+    <body>
 
-    <title>360&deg; Image Gallery</title>
-    <meta name="description" content="360&deg; Image Gallery - A-Frame">
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
-    
-    <!-- Image link template to be reused. -->
-    <script id="image-link" type="text/html">
-      <a-entity
-        class="link"
-        geometry="primitive: plane; height: 1; width: 1"
-        material="shader: flat; src: ${thumb}"
-        event-set__mouseenter="scale: 1.2 1.2 1"
-        event-set__mouseleave="scale: 1 1 1"
-        event-set__click1="_event: click; _target: #image-360; _delay: 300; material.src: ${src}; visible: true"
-        event-set__click2="_event: click; _target: #customBox; _delay: 300; visible: false"
-        proxy-event="event: click; to: #image-360; as: fade"
-        sound="on: click; src: #click-sound">
-      </a-entity>
-    </script>
+        <a-scene>
+            <a-entity id="globe-scene" globe-scene></a-entity>
+            <a-entity id="cylinder-scene" visible="false" cylinder-scene></a-entity>
 
-    <script id="object-link" type="text/html">
-      <a-entity
-        class="link"
-        geometry="primitive: plane; height: 1; width: 1"
-        material="shader: flat; color: #111"
-        event-set__mouseenter="scale: 1.2 1.2 1"
-        event-set__mouseleave="scale: 1 1 1"
-        event-set__click1="_event: click; _target: ${src}; _delay: 300; visible: true"
-        event-set__click2="_event: click; _target: #image-360; _delay: 300; visible: false"
-        sound="on: click; src: #click-sound">
-      </a-entity>
-    </script>
+            <a-entity custom-super-hand="hand: left"></a-entity>
+            <a-entity custom-super-hand='hand: right'></a-entity>
 
-    <script>
-      AFRAME.registerComponent('custom-element', {
-        schema: {
-          color: {
-            default: '#000'
-          },
-        },
-
-        update: function() {
-          const material = new THREE.MeshBasicMaterial({
-            color: this.data.color,
-            wireframe: true
-          });
-
-          const geometry = new THREE.BoxGeometry(1, 1, 1);
-
-          this.el.setObject3D('mesh', new THREE.Mesh(geometry, material));
-        },
-
-        remove: function() {
-          this.el.removeObject3D('mesh');
-        }
-      });
-    </script>
-
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- import the webpage's client-side javascript file -->
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-assets>
-        <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
-        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
-        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
-
-        <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
-        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
-        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
-
-        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
-      </a-assets>
-
-      <!-- 360-degree image. -->
-      <a-sky id="image-360" radius="10" src="#city"
-             animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
-             animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade">
-      </a-sky>
-
-      <!-- Image links. -->
-      <a-entity id="links" layout="type: line; margin: 1.5" position="-2 -1 -4">
-        <a-text template="src: #object-link" data-src="#customBox" value="Custom\nobject" align="center" color="#aaa" visible="true"></a-text>
-        <a-entity template="src: #image-link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
-        <a-entity template="src: #image-link" data-src="#city" data-thumb="#city-thumb"></a-entity>
-        <a-entity template="src: #image-link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
-      </a-entity>
-
-      <!-- experiment to embed a three.js object -->
-      <a-entity id="customBox" custom-element="color: green;" position="0 1 -5" visible="false"> </a-entity>
-
-      <!-- Camera + cursor. -->
-      <a-entity camera look-controls>
-        <a-cursor
-          id="cursor"
-          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
-          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
-          event-set__mouseenter="_event: mouseenter; color: springgreen"
-          event-set__mouseleave="_event: mouseleave; color: black"
-          raycaster="objects: .link">
-        </a-cursor>
-      </a-entity>
-    </a-scene>
-  </body>
+            <!-- CAMERA RIG -->
+            <a-entity id="cameraRig" position="0 0 0.5">
+                <!-- CAMERA -->
+                <a-camera id="camera">
+                    <a-entity hud></a-entity>
+                    <a-cursor super-hands="colliderEvent: raycaster-intersection;
+             colliderEventProperty: els;
+             colliderEndEvent: raycaster-intersection-cleared;
+             colliderEndEventProperty: clearedEls" raycaster="objects: .collidable"></a-cursor>
+                </a-camera>
+            </a-entity>
+        </a-scene>
+    </body>
 </html>
