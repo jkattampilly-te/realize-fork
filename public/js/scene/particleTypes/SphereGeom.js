@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 import ParticleGeom from './ParticleGeom.js';
 
 const SPHERE_MATERIAL = new THREE.MeshPhongMaterial({

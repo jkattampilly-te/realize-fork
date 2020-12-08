@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 // import Stats from 'https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.js';

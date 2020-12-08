@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 import Point from './Point.js'
 
 export default class ParticlesData {

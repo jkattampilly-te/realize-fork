@@ -1,8 +1,8 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 import ParticleGeom from './ParticleGeom.js';
 
 const map = new THREE.TextureLoader().load( './images/appliance-icon.png' );
-const SPRITE_MATERIAL = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );;
+const SPRITE_MATERIAL = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
 
 
 export default class CubeGeom extends ParticleGeom {

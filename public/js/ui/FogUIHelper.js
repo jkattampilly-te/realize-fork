@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 
 /*
  * Use this class to pass to dat.gui so when it manipulates near or far near is never > far and far is never < near.

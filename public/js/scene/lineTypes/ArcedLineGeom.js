@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 import LineGeom from './LineGeom.js';
 
 const LINE_MATERIAL = new THREE.LineBasicMaterial( {

@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 import ParticlesData from './ParticlesData.js';
 import LinesData from './LinesData.js';
 import StraightLineGeom from './lineTypes/StraightLineGeom.js';

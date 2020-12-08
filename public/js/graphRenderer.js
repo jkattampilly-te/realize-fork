@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';;
+import * as THREE  from 'super-three';
 import navContext from './navContext.js';
 import sceneGraph from './scene/sceneGraph.js';
 import uiControls from './ui/uiControls.js';

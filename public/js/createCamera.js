@@ -1,4 +1,4 @@
-import * as THREE from 'three/build/three.module.js';
+import * as THREE  from 'super-three';
 
 
 // Field of View. Camera frustum vertical field, from bottom to top of view, in degrees.
