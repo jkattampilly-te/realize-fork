@@ -7,10 +7,13 @@
   "description": "A simple Node app built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "parcel public/graphIntegrator.js --out-dir public/dist",
+    "build": "parcel build public/graphIntegrator.js --out-dir public/dist"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "three": "^0.123.0"
   },
   "engines": {
     "node": "12.x"
@@ -23,5 +26,8 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
 }
