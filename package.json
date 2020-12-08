@@ -28,6 +28,8 @@
     "express"
   ],
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "aframe": "^1.1.0",
+    "parcel-bundler": "^1.12.4",
+    "super-three": "^0.123.1"
   }
 }
