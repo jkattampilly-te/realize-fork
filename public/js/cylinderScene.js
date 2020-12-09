@@ -1,26 +1,61 @@
-export default function(group, _, __, graphData) {
+export default function(group, _, __, graphData, el) {
     const { nodes, links } = graphData;
 
-    const sphereGeometry = new THREE.SphereGeometry(.03, 5, 5, 0, Math.PI * 2, 0, Math.PI * 2);
-    const sphereMaterial = new THREE.MeshNormalMaterial();
-
-    const nodeKeyToSphere = {};
-
     const offsets = {
-    x: 0,
-    y: -500,
-    z: 0,
+        x: 50,
+        y: -600,
+        z: 50,
     };
 
     const scale = .01;
+    const nodeKeyToSphere = {};
+    const selected = {};
     nodes.forEach(({ key, x, y }) => {
-        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
         const r = 200 + (Math.random() - 0.5) * 50;
-        sphere.position.x = scale * (r * Math.cos(x * 2 * Math.PI / 1500 + (Math.PI/2)) + offsets.x);
-        sphere.position.y = scale * (y + offsets.y);
-        sphere.position.z = scale * (r * Math.sin(x * 2 * Math.PI / 1500 + (Math.PI/2)) + offsets.z);
-        nodeKeyToSphere[key] = sphere;
-        group.add(sphere);
+        const pos = {}
+        pos.x = scale * (r * Math.cos(x * 2 * Math.PI / 1500 + (Math.PI/2)) + offsets.x);
+        pos.y = scale * (y + offsets.y);
+        pos.z = scale * (r * Math.sin(x * 2 * Math.PI / 1500 + (Math.PI/2)) + offsets.z);
+
+        const sphereEl = document.createElement('a-sphere');
+        sphereEl.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`)
+        sphereEl.setAttribute('radius', .03);
+        sphereEl.setAttribute('color', '#a082bf');
+        sphereEl.setAttribute('class', 'collidable');
+
+        ['hoverable', 'grabbable', 'stretchable', 'draggable', 'droppable'].forEach(
+            prop => sphereEl.setAttribute(prop, true)
+        );
+
+        el.appendChild(sphereEl);
+
+        sphereEl.addEventListener('hover-start', function(event) {
+            if (!selected[key]) { 
+                sphereEl.setAttribute('color', '#FFFFFF');
+                sphereEl.setAttribute('radius', .05);
+            }
+        });
+
+        sphereEl.addEventListener('hover-end', function(event) {
+            if (!selected[key]) { 
+                sphereEl.setAttribute('color', '#a082bf');
+                sphereEl.setAttribute('radius', .03);
+            }
+        });
+
+        sphereEl.onclick = function(event) {
+            if (selected[key]) {
+                sphereEl.setAttribute('color', '#a082bf');
+                sphereEl.setAttribute('radius', .03);
+            }
+            else {
+                sphereEl.setAttribute('color', '#fca903');
+                sphereEl.setAttribute('radius', .07);
+                selected[key] = true;
+            }
+        };
+
+        nodeKeyToSphere[key] = pos;
     });
 
     const lineMaterial = new THREE.LineBasicMaterial({
@@ -29,10 +64,11 @@ export default function(group, _, __, graphData) {
 
 
     links.forEach(({ source, target }) => {
-        const sourcePos = nodeKeyToSphere[source].position;
-        const targetPos = nodeKeyToSphere[target].position;
+        const sourcePos = nodeKeyToSphere[source];
+        const targetPos = nodeKeyToSphere[target];
         const geometry = new THREE.BufferGeometry().setFromPoints([
-            sourcePos, targetPos
+            new THREE.Vector3(sourcePos.x, sourcePos.y, sourcePos.z),
+            new THREE.Vector3(targetPos.x, targetPos.y, targetPos.z)
         ]);
         const line = new THREE.Line( geometry, lineMaterial );
 

@@ -14,6 +14,6 @@ AFRAME.registerComponent('globe-scene', {
 
 AFRAME.registerComponent('cylinder-scene', {
     init: function () {
-        cylinderScene(this.el.object3D, null, null, graphData);
+        cylinderScene(this.el.object3D, null, null, graphData, this.el);
     }
 });
