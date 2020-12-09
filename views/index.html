@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>three.js webgl - buffergeometry - lines drawrange</title>
+        <title>PathVR</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="css/main.css">
@@ -18,6 +18,13 @@
             <a-entity id="globe-scene" globe-scene></a-entity>
             <a-entity id="cylinder-scene" visible="false" cylinder-scene></a-entity>
 
+            <a-assets>
+                <img id="sample-1" src="sample-tip.png">
+                <img id="sample-2" src="sample-2.png">
+
+            </a-assets>
+            
+
             <!-- CAMERA RIG -->
             <a-entity id="cameraRig" position="0 0 0.5">
                 <a-entity id="super-left-hand" custom-super-hand="hand: left"></a-entity>
@@ -26,8 +33,15 @@
                 <a-entity oculus-touch-controls="hand: left" thumbstick-logging></a-entity>
                 <a-entity oculus-touch-controls="hand: right" thumbstick-logging></a-entity>
                 <!-- CAMERA -->
+
+
+                <a-image id="node-tip" src="#sample-2" position="0.533 1.7 -1" material="opacity: 0.6" scale="0.5 0.5" visible="false"></a-image>
+
                 <a-camera id="camera">
                     <a-entity hud></a-entity>
+
+
+
                     <!-- <a-cursor
                         super-hands="
                             colliderEvent: raycaster-intersection;
