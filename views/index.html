@@ -7,16 +7,31 @@
         <link type="text/css" rel="stylesheet" href="css/main.css">
         <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+        <script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
         <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
         <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
         <script src="aframeHud.js"></script>
         <script src="dist/graphIntegrator.js"></script>
+        <script id="button" type="text/html">
+            <a-entity
+                class="link collidable"
+                geometry="primitive: plane; height: 0.33; width: 0.66"
+                hoverable
+                clickable
+                text="value: ${label}; align: center; color: #111; width: 1.5; font: exo2semibold; opacity: ${opacity};"
+                material="color: #aaa; repeat: shader: flat; blending: additive; opacity: ${opacity};"
+                event-set__mouseenter="scale: 1.2 1.2 1"
+                event-set__mouseleave="scale: 1 1 1"></a-entity>
+        </script>
     </head>
     <body>
-
         <a-scene>
             <a-entity id="globe-scene" globe-scene></a-entity>
-            <a-entity id="cylinder-scene" visible="false" cylinder-scene></a-entity>
+            <a-entity
+                id="cylinder-scene"
+                visible="false"
+                cylinder-scene
+                data-graph="test1"></a-entity>
 
             <a-assets>
                 <img id="sample-1" src="sample-tip.png">
@@ -32,16 +47,73 @@
 
                 <a-entity oculus-touch-controls="hand: left" thumbstick-logging></a-entity>
                 <a-entity oculus-touch-controls="hand: right" thumbstick-logging></a-entity>
+
                 <!-- CAMERA -->
 
 
                 <a-image id="node-tip" src="#sample-2" position="0.533 1.7 -1" material="opacity: 0.6" scale="0.5 0.5" visible="false"></a-image>
 
                 <a-camera id="camera">
-                    <a-entity hud></a-entity>
+                    <a-entity
+                        position="0.66 0.5 -1.5"
+                        rotation="15 -30 0"
+                        scale="0.7 0.7 1">
+                        <a-text
+                            value="Choose Test"
+                            font="exo2bold"
+                            align="center"
+                            width="3"></a-text>
+                        <a-entity
+                            template="src: #button"
+                            test-button
+                            data-label="Test 1"
+                            data-opacity="0.75"
+                            position="0 -0.3 0"
+                            data-graph="test-1">
+                        </a-entity>
+                        <a-entity
+                            template="src: #button"
+                            test-button
+                            data-label="Test 2"
+                            data-opacity="0.75"
+                            position="0 -0.7 0"
+                            data-graph="test-2">
+                        </a-entity>
+                        <a-entity
+                            template="src: #button"
+                            data-label="Test 3"
+                            data-opacity="0.75"
+                            position="0 -1.1 0">
+                        </a-entity>
+                        <a-entity
+                            template="src: #button"
+                            data-label="Test 4"
+                            data-opacity="0.3"
+                            position="0 -1.5 0">
+                        </a-entity>
+                        <a-entity
+                            template="src: #button"
+                            data-label="Test 5"
+                            data-opacity="0.2"
+                            position="0 -1.9 0">
+                        </a-entity>
+                        <a-entity
+                            template="src: #button"
+                            data-label="Test 6"
+                            position="0 -2.3 0"
+                            data-opacity="0.1">
+                        </a-entity>
+                    </a-entity>
 
-
-
+                    <a-entity
+                        template="src: #button"
+                        switch-scene
+                        data-label="Switch Scene"
+                        data-opacity="0.75"
+                        position="-0.5 -0.66 -1.5"
+                        scale="0.75 0.75 1"
+                        rotation="-30 30 0">
+                    </a-entity>
                     <!-- <a-cursor
                         super-hands="
                             colliderEvent: raycaster-intersection;
