@@ -8,7 +8,13 @@ const sceneParams = new SceneParameters(maxParticleCount);
 AFRAME.registerComponent('globe-scene', {
     init: function () {
         const sceneZ = -12;
-        sceneGraph(this.el.object3D, sceneParams, sceneZ);
+        const group = sceneGraph(this.el.object3D, sceneParams, sceneZ);
+
+        animate(group);
+        function animate() {
+            group.animate();
+            requestAnimationFrame(animate);
+        }
     }
 });
 
