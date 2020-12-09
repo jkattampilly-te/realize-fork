@@ -16,20 +16,6 @@ AFRAME.registerComponent('switch-scene', {
     }
 });
 
-AFRAME.registerComponent('test-button', {
-    dependencies: ['super-hands', 'raycaster'],
-    init: function () {
-        const graphKey = this.el.getAttribute('data-graph');
-        debugger
-        this.el.addEventListener('grab-end', () => {
-            const cylinder = document.querySelector('#cylinder-scene');
-            const currentKey = cylinder.getAttribute('data-graph');
-            if (currentKey !== graphKey) {
-                cylinder.setAttribute('data-graph-key', graphKey);
-            }
-        });
-    }
-});
 
 AFRAME.registerComponent('custom-super-hand', {
     schema: {
