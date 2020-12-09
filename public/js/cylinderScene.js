@@ -1,5 +1,5 @@
-
-export default function(group, _, __, graphData, el) {
+export default function(el, graphData) {
+    const group = el.object3D;
     const { nodes, links } = graphData;
 
     const offsets = {
