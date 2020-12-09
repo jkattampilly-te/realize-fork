@@ -26,10 +26,13 @@
                 <!-- CAMERA -->
                 <a-camera id="camera">
                     <a-entity hud></a-entity>
-                    <a-cursor super-hands="colliderEvent: raycaster-intersection;
-             colliderEventProperty: els;
-             colliderEndEvent: raycaster-intersection-cleared;
-             colliderEndEventProperty: clearedEls" raycaster="objects: .collidable"></a-cursor>
+                    <!-- <a-cursor
+                        super-hands="
+                            colliderEvent: raycaster-intersection;
+                            colliderEventProperty: els;
+                            colliderEndEvent: raycaster-intersection-cleared;
+                            colliderEndEventProperty: clearedEls"
+                        raycaster="objects: .collidable"></a-cursor> -->
                 </a-camera>
             </a-entity>
         </a-scene>

@@ -1,54 +1,51 @@
 function createMinButton() {
-    
+
 }
 
 AFRAME.registerComponent('hud', {
     dependencies: ['super-hands', 'raycaster'],
     init: function () {
-        let sceneEl = document.querySelector('a-scene');
-        let elem = this.el;
-        let isMinimized = false;
-        
+        // const sceneEl = document.querySelector('a-scene');
+        const elem = this.el;
+
         // Create dash element
-        let hud = document.createElement('a-entity');
+        const hud = document.createElement('a-entity');
         hud.setAttribute('geometry', {
-				primitive: 'box',
-				width: 1,
-				height: 1,
-				depth: 1
-			});
+            primitive: 'box',
+            width: 0.15,
+            height: 0.15,
+            depth: 0.01
+        });
+
         // Position when rigged
-        hud.setAttribute('position', '0.2 0 -1.5');
-        // dash.setAttribute('position', '0.2 1 -1.5');
+        hud.setAttribute('position', '-0.333 -0.333 -1.5');
+        hud.setAttribute('rotation', '-30 30 0');
+
         hud.setAttribute('class', 'collidable');
         hud.setAttribute('hoverable');
         hud.setAttribute('clickable');
         hud.setAttribute('material', {
-            color: '#323436'
+            color: '#f00'
         });
-        hud.setAttribute('scale', {
-            x: '1.2',
-            y: '0.8',
-            z: '0.05',
-        });
+
         elem.appendChild(hud);
-        hud.addEventListener('hover-start', function(event) {
+        hud.addEventListener('hover-start', function (event) {
             console.log('something happened');
             hud.setAttribute('material', {
-                color: '#f8f8f8'
+                color: '#0f0'
             });
             event.preventDefault();
         });
-        
-        hud.addEventListener('hover-end', function(event) {
+
+        hud.addEventListener('hover-end', function (event) {
             console.log('something happened');
             hud.setAttribute('material', {
-                color: '#323436'
+                color: '#f00'
             });
             event.preventDefault();
         });
-        
-        hud.addEventListener('grab-start', function(event) {
+
+        hud.addEventListener('grab-start', function (event) {
             const globe = document.querySelector('#globe-scene');
             const cylinder = document.querySelector('#cylinder-scene');
             const showGlobe = !globe.getAttribute('visible');
@@ -65,7 +62,7 @@ AFRAME.registerComponent('hud', {
 
 AFRAME.registerComponent('custom-super-hand', {
     schema: {
-        hand: {type: 'string', default: ''}
+        hand: { type: 'string', default: '' }
     },
     init: function () {
         let elem = this.el;
