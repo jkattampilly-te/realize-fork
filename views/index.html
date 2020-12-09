@@ -18,11 +18,13 @@
             <a-entity id="globe-scene" globe-scene></a-entity>
             <a-entity id="cylinder-scene" visible="false" cylinder-scene></a-entity>
 
-            <a-entity custom-super-hand="hand: left"></a-entity>
-            <a-entity custom-super-hand='hand: right'></a-entity>
-
             <!-- CAMERA RIG -->
             <a-entity id="cameraRig" position="0 0 0.5">
+                <a-entity id="super-left-hand" custom-super-hand="hand: left"></a-entity>
+                <a-entity id="super-right-hand" custom-super-hand='hand: right'></a-entity>
+
+                <a-entity oculus-touch-controls="hand: left" thumbstick-logging></a-entity>
+                <a-entity oculus-touch-controls="hand: right" thumbstick-logging></a-entity>
                 <!-- CAMERA -->
                 <a-camera id="camera">
                     <a-entity hud></a-entity>
