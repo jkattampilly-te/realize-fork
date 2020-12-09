@@ -75,3 +75,18 @@ AFRAME.registerComponent('custom-super-hand', {
         elem.appendChild(cursorEl);
     }
 })
+
+AFRAME.registerComponent('thumbstick-logging',{
+    init: function () {
+        this.el.addEventListener('thumbstickmoved', this.logThumbstick);
+    },
+    logThumbstick: function (evt) {
+        const camRig = document.querySelector('#cameraRig');
+        const camRigPosition = camRig.getAttribute('position');
+        camRig.setAttribute('position', {
+            x: camRigPosition.x + evt.detail.x,
+            y: camRigPosition.y,
+            z: camRigPosition.z + + evt.detail.y
+        })
+    }
+});
